@@ -7,16 +7,21 @@ namespace CSharp_DesignPatterns.Sandbox
 
         private Singleton()
         {
+            // stuff that must only happen once.
         }
 
-        public static Singleton Instance()
+        public static Singleton Instance
         {
-            if (instance == null)
+            get
             {
-                instance = new Singleton();
+                if (instance == null)
+                {
+                    instance = new Singleton();
+                }
+
+                return instance;
             }
 
-            return instance;
         }
 
         // Raison d'etre for the class
