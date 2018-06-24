@@ -3,9 +3,14 @@ using System;
 namespace CSharp_DesignPatterns.Sandbox 
 {
     // static is sealed and abstracted - no constructor
-    public class SimpleSingleton 
+    public class FullLazySingleton 
     {
+      private static class SingletonHolder
+      {
         internal static readonly Singleton instance = new Singleton();
+        // empty static constructor - forces laziness! - executed only once, cannot have anything in there
+        static SingletonHolder() {}
+      }
 
         private Singleton()
         {
@@ -13,7 +18,7 @@ namespace CSharp_DesignPatterns.Sandbox
             Console.WriteLine("Singleton constructor");
         }
 
-        public static Singleton Instance {get { return instance; } }
+        public static Singleton Instance {get { return SingletonHolder.instance; } }
 
         public static void SayHi()
         {

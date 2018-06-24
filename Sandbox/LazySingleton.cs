@@ -2,10 +2,10 @@ using System;
 
 namespace CSharp_DesignPatterns.Sandbox 
 {
-    // static is sealed and abstracted - no constructor
-    public class SimpleSingleton 
+    // for .NET 4
+    public class LazySingleton 
     {
-        internal static readonly Singleton instance = new Singleton();
+        private static readonly Lazy<Singleton> lazyInstance = new Lazy<Singleton>(() => new Singleton(), Lazy);
 
         private Singleton()
         {
@@ -13,7 +13,7 @@ namespace CSharp_DesignPatterns.Sandbox
             Console.WriteLine("Singleton constructor");
         }
 
-        public static Singleton Instance {get { return instance; } }
+        public static Singleton Instance {get { return lazyInstance.Value; } }
 
         public static void SayHi()
         {

@@ -40,6 +40,8 @@ namespace CSharp_DesignPatterns.Sandbox
     }
 }
 
+// Singleton article - http://csharpindepth.com/articles/general/singleton.aspx
+
 // Why to NOT use a Singleton
 /*
 
