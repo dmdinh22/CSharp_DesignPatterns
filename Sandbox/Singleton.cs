@@ -3,6 +3,7 @@ namespace CSharp_DesignPatterns.Sandbox
     // static is sealed and abstracted - no constructor
     public class Singleton 
     {
+        private static readonly object mutex = new object();
         private static Singleton instance;
 
         private Singleton()
@@ -14,19 +15,31 @@ namespace CSharp_DesignPatterns.Sandbox
         {
             get
             {
-                if (instance == null)
+                if (instance == null) 
                 {
-                    instance = new Singleton();
-                }
+                    // mutex - mutual exclusion object that allows multiple threads to synchronise access to a shared resource
+                    lock (mutex)
+                    {
+                        if (instance == null)
+                        {
+                            instance = new Singleton();
+                        }
 
+                    }
+                }
                 return instance;
             }
-
         }
 
         // Raison d'etre for the class
         public void DoSomething () 
         {
+            // This method needs to be thread-safe!
         }
     }
 }
+
+// Why to NOT use a Singleton
+/*
+
+ */
