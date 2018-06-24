@@ -4,7 +4,8 @@ namespace CSharp_DesignPatterns.Sandbox
     public class Singleton 
     {
         private static readonly object mutex = new object();
-        private static Singleton instance;
+        //volatile - field can be modified in the program by something such as the OS, hardware, or concurrently executing thread
+        private static volatile Singleton instance;
 
         private Singleton()
         {
