@@ -1,19 +1,22 @@
 using System;
+using NodaTime;
 
 namespace CSharp_DesignPatterns.Interfaces
 {
     public class License
     {
-        private readonly DateTime expiry;
+        private readonly Instant expiry;
+        private readonly IClock clock;
 
-        public License(DateTime expiry)
+        public License(Instant expiry, IClock clock)
         {
             this.expiry = expiry;
+            this.clock = clock;
         }
 
         public bool HasExpired
         {
-            get { return DateTime.UtcNow > expiry; }
+            get { return clock.Now >= expiry; }
         }
     }
 }
