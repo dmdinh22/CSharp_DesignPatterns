@@ -1,7 +1,7 @@
-namespace CSharp_DesignPatterns.Sandbox 
+namespace CSharp_DesignPatterns.Sandbox
 {
     // static is sealed and abstracted - no constructor
-    public class Singleton 
+    public class Singleton
     {
         private static readonly object mutex = new object();
         //volatile - field can be modified in the program by something such as the OS, hardware, or concurrently executing thread
@@ -16,10 +16,10 @@ namespace CSharp_DesignPatterns.Sandbox
         {
             get
             {
-                if (instance == null) 
+                if (instance == null)
                 {
                     // mutex - mutual exclusion object that allows multiple threads to synchronise access to a shared resource
-                    lock (mutex)
+                    lock(mutex)
                     {
                         if (instance == null)
                         {
@@ -33,7 +33,7 @@ namespace CSharp_DesignPatterns.Sandbox
         }
 
         // Raison d'etre for the class
-        public void DoSomething () 
+        public void DoSomething()
         {
             // This method needs to be thread-safe!
         }

@@ -11,6 +11,7 @@ namespace CSharp_DesignPatterns.Interfaces
         public License(Instant expiry, IClock clock)
         {
             this.expiry = expiry;
+            //this.clock = SystemClock.Instance; // tightly bound
             this.clock = clock;
         }
 
