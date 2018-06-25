@@ -12,7 +12,7 @@ namespace CSharp_DesignPatterns.Interfaces
         static void ExpiredLicense()
         {
             Instant expiry = Instant.FromUtc(2000, 1, 1, 0, 0, 0);
-            StubClock clock = new StubClock(expiry + Duration.OneTick);
+            FakeClock clock = new FakeClock(expiry + Duration.OneTick);
             License license = new License(expiry, clock);
 
             Assert.IsTrue(license.HasExpired);
@@ -22,7 +22,7 @@ namespace CSharp_DesignPatterns.Interfaces
         static void ExpiryAtExactInstant()
         {
             Instant expiry = Instant.FromUtc(2000, 1, 1, 0, 0, 0);
-            StubClock clock = new StubClock(expiry - Duration.OneTick);
+            FakeClock clock = new FakeClock(expiry - Duration.OneTick);
             License license = new License(expiry, clock);
 
             Assert.IsTrue(license.HasExpired);
@@ -32,7 +32,7 @@ namespace CSharp_DesignPatterns.Interfaces
         static void NonExpiredLicense()
         {
             Instant expiry = Instant.FromUtc(2000, 1, 1, 0, 0, 0);
-            StubClock clock = new StubClock(expiry - Duration.OneTick);
+            FakeClock clock = new FakeClock(expiry - Duration.OneTick);
             License license = new License(expiry, clock);
 
             Assert.IsFalse(license.HasExpired);
@@ -42,7 +42,7 @@ namespace CSharp_DesignPatterns.Interfaces
         public void NonExpiredLicenseBecomesLicense()
         {
             Instant expiry = Instant.FromUtc(2000, 1, 1, 0, 0, 0);
-            StubClock clock = new StubClock(expiry - Duration.OneTick);
+            FakeClock clock = new FakeClock(expiry - Duration.OneTick);
             License license = new License(expiry, clock);
 
             Assert.IsFalse(license.HasExpired);
