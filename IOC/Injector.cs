@@ -6,6 +6,8 @@ namespace CSharp_DesignPatterns.IOC
     // Inversion Of Control
     public class Injector
     {
+
+        public void Bind<T>(T instance) { }
         public IClock CreateClock()
         {
             return SystemClock.Instance;
