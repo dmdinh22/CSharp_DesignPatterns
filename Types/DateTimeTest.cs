@@ -32,18 +32,17 @@ namespace CSharp_DesignPatterns.Types
         {
             DateTime utc1 = new DateTime(2012, 10, 28, 0, 30, 0, DateTimeKind.Utc);
             DateTime utc2 = new DateTime(2012, 10, 28, 1, 30, 0, DateTimeKind.Utc);
-
             Assert.AreNotEqual(utc1, utc2);
 
             DateTime local1 = utc1.ToLocalTime();
             DateTime local2 = utc2.ToLocalTime();
-
             Assert.AreEqual(local1, local2);
 
             DateTime utc3 = local1.ToUniversalTime();
             DateTime utc4 = local2.ToUniversalTime();
-
-            Assert.AreEqual(utc3, utc4);
+            Assert.AreNotEqual(utc3, utc4);
+            Assert.AreEqual(utc1, utc3);
+            Assert.AreEqual(utc2, utc4);
         }
     }
 }
