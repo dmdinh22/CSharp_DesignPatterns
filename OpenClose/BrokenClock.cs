@@ -14,4 +14,14 @@ namespace CSharp_DesignPatterns.OpenClose
             }
         }
     }
+
+    public class Person
+    {
+        public string Name { get; set; }
+    }
+
+    public class Spy : Person
+    {
+
+    }
 }
