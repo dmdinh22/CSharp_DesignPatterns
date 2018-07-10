@@ -7,6 +7,12 @@ namespace CSharp_DesignPatterns.OpenClose
 {
     class Liskov
     {
+
+        public virtual string Foo()
+        {
+            return "hello";
+        }
+
         public void ArraysBreakLiskov()
         {
             IList<string> strings = new string[5];
