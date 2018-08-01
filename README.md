@@ -1,5 +1,5 @@
 # C# Design Strategies
-Pluralsight class ft. Jon Skeet
+Pluralsight class by Jon Skeet
 
 # SOLID
 ## Single Responsibility
