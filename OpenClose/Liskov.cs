@@ -10,7 +10,7 @@ namespace CSharp_DesignPatterns.OpenClose
         public int X { get; set; }
         public int Y { get; set; }
     }
-    public class Liskov
+    public class Liskov // seal it to protect it from inheritance by users
     {
         // overload method
         public virtual string FormatPoint(Point point)
