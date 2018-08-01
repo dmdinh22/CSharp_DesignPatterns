@@ -4472,30 +4472,28 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\dmdin\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "/Users/dmdinh/.nuget/packages/": {},
+    "/usr/local/share/dotnet/sdk/NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\dmdin\\repos\\CSharp_DesignPatterns\\CSharp_DesignPatterns.csproj",
+      "projectUniqueName": "/Users/dmdinh/repos/CSharp_DesignPatterns/CSharp_DesignPatterns.csproj",
       "projectName": "CSharp_DesignPatterns",
-      "projectPath": "c:\\Users\\dmdin\\repos\\CSharp_DesignPatterns\\CSharp_DesignPatterns.csproj",
-      "packagesPath": "C:\\Users\\dmdin\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\dmdin\\repos\\CSharp_DesignPatterns\\obj\\",
+      "projectPath": "/Users/dmdinh/repos/CSharp_DesignPatterns/CSharp_DesignPatterns.csproj",
+      "packagesPath": "/Users/dmdinh/.nuget/packages/",
+      "outputPath": "/Users/dmdinh/repos/CSharp_DesignPatterns/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\dmdin\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/Users/dmdinh/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.1"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

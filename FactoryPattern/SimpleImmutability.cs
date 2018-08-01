@@ -1,3 +1,4 @@
+using System;
 using NUnit.Framework;
 
 namespace CSharp_DesignPatterns.FactoryPattern
@@ -28,7 +29,7 @@ namespace CSharp_DesignPatterns.FactoryPattern
         /* 
         public long Ticks { get; private set; }
         */
-        
+
         private BadDuration(long ticks)
         {
             this.ticks = ticks;
@@ -50,7 +51,7 @@ namespace CSharp_DesignPatterns.FactoryPattern
         }
     }
 
-    [TestFixture]    
+    [TestFixture]
     public class SimpleImmutability
     {
         [Test]
