@@ -1,4 +1,5 @@
 using System;
+using NodaTime;
 using NUnit.Framework;
 
 namespace CSharp_DesignPatterns.FactoryPattern
@@ -66,6 +67,23 @@ namespace CSharp_DesignPatterns.FactoryPattern
         {
             BadDuration duration = BadDuration.FromTicks(10);
             Assert.AreEqual(10, duration.Ticks);
+        }
+
+        [Test]
+        public void WithZone()
+        {
+            DateTimeZone london = DateTimeZone.ForId("Europe/London");
+            DateTimeZone hawaii = DateTimeZone.ForId("Pacific/Honolulu");
+            ZonedDateTime uk = new ZonedDateTime(SystemClock.Instance.Now, london)
+            Console.WriteLine(uk);
+            Console.WriteLine(uk.WithZone(hawaii));
+        }
+
+        [Test]
+        public void BuilderPattern()
+        {
+            Period period = Period.FromHours(5);
+            period = Period.FromHours(5) + Period.FromMinutes(3);
         }
     }
 }
