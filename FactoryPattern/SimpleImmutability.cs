@@ -90,24 +90,26 @@ namespace CSharp_DesignPatterns.FactoryPattern
             Assert.AreEqual(0, built.Seconds);
             Assert.AreEqual(period, built);
 
-            var badPeriod = new BadPeriod.Builder { }.Build();
+            var shyPeriod = new ShyPeriod.Builder { }.Build();
         }
     }
 
-    public sealed class BadPeriod
+    public sealed class ShyPeriod
     {
         private readonly string name;
 
-        private BadPeriod(Builder builder)
+        public string Name { get { return name; } }
+
+        private ShyPeriod(Builder builder)
         {
             this.name = builder.Name;
         }
         public sealed class Builder
         {
             public string Name { get; set; }
-            public BadPeriod Build()
+            public ShyPeriod Build()
             {
-                return new BadPeriod(this);
+                return new ShyPeriod(this);
             }
         }
     }
