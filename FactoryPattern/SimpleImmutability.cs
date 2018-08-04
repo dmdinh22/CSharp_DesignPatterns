@@ -74,7 +74,7 @@ namespace CSharp_DesignPatterns.FactoryPattern
         {
             DateTimeZone london = DateTimeZone.ForId("Europe/London");
             DateTimeZone hawaii = DateTimeZone.ForId("Pacific/Honolulu");
-            ZonedDateTime uk = new ZonedDateTime(SystemClock.Instance.Now, london)
+            ZonedDateTime uk = new ZonedDateTime(SystemClock.Instance.Now, london);
             Console.WriteLine(uk);
             Console.WriteLine(uk.WithZone(hawaii));
         }
@@ -84,6 +84,31 @@ namespace CSharp_DesignPatterns.FactoryPattern
         {
             Period period = Period.FromHours(5);
             period = Period.FromHours(5) + Period.FromMinutes(3);
+
+            Period built = new PeriodBuilder { Hours = 5, Minutes = 3 }.Build();
+
+            Assert.AreEqual(0, built.Seconds);
+            Assert.AreEqual(period, built);
+
+            var badPeriod = new BadPeriod.Builder { }.Build();
+        }
+    }
+
+    public sealed class BadPeriod
+    {
+        private readonly string name;
+
+        private BadPeriod(Builder builder)
+        {
+            this.name = builder.Name;
+        }
+        public sealed class Builder
+        {
+            public string Name { get; set; }
+            public BadPeriod Build()
+            {
+                return new BadPeriod(this);
+            }
         }
     }
 }
