@@ -25,7 +25,12 @@ namespace CSharp_DesignPatterns.StrategyPattern
                 // list.Sort((x, y) => x.Age.CompareTo(y.Age));
                 // list.Sort(new AgeComparer());
 
-                list.Sort(new LoggingComparer<Person>(new AgeComparer()));
+                // LoggingComparer decorating sorting operation by adding logging 
+                // right on top of strategy being used
+                //list.Sort(new LoggingComparer<Person>(new AgeComparer()));
+
+                // using a trick defined below with type inference
+                list.Sort(LoggingComparer.For(new AgeComparer()));
 
                 foreach (var person in list)
                 {
@@ -67,6 +72,15 @@ namespace CSharp_DesignPatterns.StrategyPattern
                 public int Compare(Person x, Person y)
                 {
                     return x.Age.CompareTo(y.Age);
+                }
+            }
+
+            // little trick for decorator using type inference with method using its args
+            public static class LoggingComparer
+            {
+                public static IComparer<T> For<T>(IComparer<T> comparer)
+                {
+                    return new LoggingComparer<T>(comparer);
                 }
             }
 
