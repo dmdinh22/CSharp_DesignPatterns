@@ -32,6 +32,9 @@ namespace CSharp_DesignPatterns.StrategyPattern
                 // using a trick defined below with type inference
                 list.Sort(LoggingComparer.For(new AgeComparer()));
 
+                // using nasty way - inheritancesucks
+                list.Sort(new InheritanceSucksLoggingAgeComparer());
+
                 foreach (var person in list)
                 {
                     Console.WriteLine(person);
@@ -69,35 +72,56 @@ namespace CSharp_DesignPatterns.StrategyPattern
 
             public class AgeComparer : IComparer<Person>
             {
-                public int Compare(Person x, Person y)
+                // how do we know which methods to make virtual so it can
+                // be overriden? this ex only has one method, but if we have many
+                // there can be problems making everything virtual
+                // this is why Jon does not like inheritance
+                public virtual int Compare(Person x, Person y)
                 {
                     return x.Age.CompareTo(y.Age);
                 }
             }
 
-            // little trick for decorator using type inference with method using its args
-            public static class LoggingComparer
+            public class InheritanceSucksLoggingAgeComparer : AgeComparer
             {
-                public static IComparer<T> For<T>(IComparer<T> comparer)
+                public override int Compare(Person x, Person y)
                 {
-                    return new LoggingComparer<T>(comparer);
+                    int result = base.Compare(x, y);
+                    Console.WriteLine("Compare({0}, {1}) == {2}", x, y, result);
+                    return result;
                 }
             }
 
-            public sealed class LoggingComparer<T> : IComparer<T>
+            // little trick for decorator using type inference with method using its args
+            public static class ReversingComparer
+            {
+                public static IComparer<T> For<T>(IComparer<T> comparer)
+                {
+                    return new ReversingComparer<T>(comparer);
+                }
+            }
+
+            public sealed class ReversingComparer<T> : IComparer<T>
             {
                 private readonly IComparer<T> comparer;
 
-                public LoggingComparer(IComparer<T> comparer)
+                public ReversingComparer(IComparer<T> comparer)
                 {
                     this.comparer = comparer;
                 }
 
                 public int Compare(T x, T y)
                 {
-                    int result = comparer.Compare(x, y);
-                    Console.WriteLine("Compare({0}, {1}) == {2}", x, y, result);
-                    return result;
+                    // int result = comparer.Compare(x, y);
+                    // Console.WriteLine("Compare({0}, {1}) == {2}", x, y, result);
+                    // return result;
+
+                    // Comparer.Comare() returns:
+                    // -1 if x < y
+                    // 0 if x == y
+                    // 1 if y > x
+                    int originalResult = comparer.Compare(x, y);
+                    return -originalResult;
                 }
             }
         }
