@@ -21,9 +21,11 @@ namespace CSharp_DesignPatterns.StrategyPattern
             public void SortingByAge()
             {
                 var list = People.ToList();
-                list.Sort(CompareByAge);
-                list.Sort((x, y) => x.Age.CompareTo(y.Age));
-                list.Sort(new AgeComparer());
+                // list.Sort(CompareByAge);
+                // list.Sort((x, y) => x.Age.CompareTo(y.Age));
+                // list.Sort(new AgeComparer());
+
+                list.Sort(new LoggingComparer<Person>(new AgeComparer()));
 
                 foreach (var person in list)
                 {
@@ -60,6 +62,23 @@ namespace CSharp_DesignPatterns.StrategyPattern
                 public int Compare(Person x, Person y)
                 {
                     return x.Age.CompareTo(y.Age);
+                }
+            }
+
+            public sealed class LoggingComparer<T> : IComparer<T>
+            {
+                private readonly IComparer<T> comparer;
+
+                public LoggingComparer(IComparer<T> comparer)
+                {
+                    this.comparer = comparer;
+                }
+
+                public int Compare(T x, T y)
+                {
+                    int result = comparer.Compare(x, y);
+                    Console.WriteLine("Compare({0}, {1}) == {2}", x, y, result);
+                    return result;
                 }
             }
         }
