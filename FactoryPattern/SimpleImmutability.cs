@@ -131,6 +131,13 @@ namespace CSharp_DesignPatterns.FactoryPattern
         {
             this.name = builder.Name;
         }
+
+        //convenience method added
+        public static ShyPeriod FromName(string name)
+        {
+
+        }
+
         public sealed class Builder
         {
             public string Name { get; set; }
