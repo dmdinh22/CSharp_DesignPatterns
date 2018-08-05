@@ -94,6 +94,33 @@ namespace CSharp_DesignPatterns.FactoryPattern
         }
     }
 
+    public sealed class EfficientFoo
+    {
+        private string name;
+
+        private EfficientFoo()
+        {
+
+        }
+
+        public sealed class Builder
+        {
+            private EfficientFoo foo;
+            public string Name
+            {
+                get { return foo.name; }
+                set { foo.name = value; }
+            }
+
+            public EfficientFoo Build()
+            {
+                EfficientFoo copy = foo;
+                foo = new EfficientFoo();
+                return copy;
+            }
+        }
+    }
+
     public sealed class ShyPeriod
     {
         private readonly string name;
