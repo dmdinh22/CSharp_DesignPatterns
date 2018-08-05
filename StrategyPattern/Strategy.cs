@@ -29,8 +29,16 @@ namespace CSharp_DesignPatterns.StrategyPattern
                 // right on top of strategy being used
                 //list.Sort(new LoggingComparer<Person>(new AgeComparer()));
 
+                // sbyte: -128 to +127
+
                 // using a trick defined below with type inference
-                list.Sort(LoggingComparer.For(new AgeComparer()));
+                list.Sort(ReversingComparer.For(new AgeComparer()));
+
+                // using OrderBy takes a different approach
+                // here's how i convert from big obj to a comparison key, and then sort
+                // the comparison keys in natural order
+                list = list.OrderByDescending(p => p.Name,
+                    StringComparer.CurrentCultureIgnoreCase).ToList();
 
                 // using nasty way - inheritancesucks
                 list.Sort(new InheritanceSucksLoggingAgeComparer());
@@ -120,8 +128,14 @@ namespace CSharp_DesignPatterns.StrategyPattern
                     // -1 if x < y
                     // 0 if x == y
                     // 1 if y > x
-                    int originalResult = comparer.Compare(x, y);
-                    return -originalResult;
+                    // WRONG THING TO DO
+                    /*
+                        int originalResult = comparer.Compare(x, y);
+                        return -originalResult;
+                     */
+
+                    // switch order of params to compare - IComparer<T> with extremes
+                    return comparer.Compare(y, x);
                 }
             }
         }
