@@ -57,6 +57,11 @@ namespace CSharp_DesignPatterns.StrategyPattern
                 return x.Age.CompareTo(y.Age);
             }
 
+            static int CompareByName(Person x, Person y)
+            {
+                return x.Name.CompareTo(y.Name);
+            }
+
             public class AgeComparer : IComparer<Person>
             {
                 public int Compare(Person x, Person y)
